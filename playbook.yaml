@@ -1,7 +1,7 @@
 ---
 - name: Install Nginx and Upload my Web Site
- hosts: all
- become: yes
+  hosts: all
+  become: yes
  
   vars:
     source_file: default
