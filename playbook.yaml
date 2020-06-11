@@ -1,0 +1,30 @@
+playbook.yaml
+---
+- name: Install Nginx and Upload my Web Site
+ hosts: all
+ become: yes
+ 
+  vars:
+    source_file: default
+    destin_file: /etc/nginx/sites-available/
+  
+    source_folder_site: packages/ganttlab-adapter-webapp/dist/
+    destin_folser_site: /var/www/html/GanttLab
+ 
+  tasks:
+  - name: Install Nginx Web Server
+    apt: name=nginx state=latest
+ 
+  - name: Copy Nginx config-file to Server
+    copy: src={{ source_file }} dest={{ destin_file }} mode=0555
+    notify: Restart Nginx
+                                                                                                                   
+  - name: Start WebServer and make it enable on boot
+    service: name=nginx state=started enabled=yes
+  
+  - name: Copy Site Folder
+    copy: src={{ source_folder_site }} dest={{ destin_folser_site }} mode=0555
+  
+  handlers:
+  - name: Restart Nginx
+    service: name=nginx state=restarted
