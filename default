@@ -1,0 +1,12 @@
+server {
+      listen 80;
+ 
+      server_name ganttlab.com;
+ 
+      root /var/www/html/GanttLab;
+      index index.html;
+ 
+      location / {
+              try_files $uri $uri/ =404;
+      }
+}
