@@ -1,4 +1,3 @@
-playbook.yaml
 ---
 - name: Install Nginx and Upload my Web Site
  hosts: all
